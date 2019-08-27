@@ -1,0 +1,36 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/schema",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": ["libs"],
+  "properties": {
+    "libs": {
+      "$id": "#/properties/libs",
+      "type": "array",
+      "title": "The Libs Schema",
+      "items": {
+        "$id": "#/properties/libs/items",
+        "type": "object",
+        "title": "The Library to include",
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "$id": "#/properties/libs/items/properties/name",
+            "type": "string",
+            "title": "The Name Schema",
+            "default": "",
+            "pattern": "^(.*)$"
+          },
+          "assetsRoot": {
+            "$id": "#/properties/libs/items/properties/imageSubFolder",
+            "type": "boolean",
+            "title": "The AssetsRoot Schema",
+            "description": "Determines if the assets (apart from i18n) should be placed in the root instead of sub-folders per library (Default: true).",
+            "default": false
+          }
+        }
+      }
+    }
+  }
+}

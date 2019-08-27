@@ -1,0 +1,14 @@
+{
+  "builders": {
+    "browser": {
+      "implementation": "./dist/browser",
+      "schema": "./dist/browser/schema.json",
+      "description": "Add assets and runs @angular-devkit/build-angular:browser"
+    },
+    "dev-server": {
+      "implementation": "./dist/dev-server",
+      "schema": "./dist/dev-server/schema.json",
+      "description": "Add assets and runs @angular-devkit/build-angular:dev-server"
+    }
+  }
+}

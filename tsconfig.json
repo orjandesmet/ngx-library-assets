@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": ".",
+        "outDir": "dist",
+        "rootDir": "src",
+        "module": "commonjs",
+        "target": "es5",
+        "types": [
+            "node"
+        ],
+        "lib": [
+            "es2015",
+            "es2017"
+        ]
+    },
+    "include": [
+        "**/*.ts"
+    ],
+    "exclude": [
+        "**/files/**/*.ts"
+    ]
+}
