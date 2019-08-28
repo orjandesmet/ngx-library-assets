@@ -1,0 +1,15 @@
+{
+    "$schema": "../../../../node_modules/ngx-library-assets/include-schema.json",
+    "libs": [
+        {
+            "name": "my-lib"
+        },
+        {
+            "name": "shared",
+            "assetsRoot": true
+        },
+        {
+            "name": "example-non-existing-lib"
+        }
+    ]
+}
