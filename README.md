@@ -13,12 +13,13 @@ Including assets from an existing library into an application is as easy as to u
 
 ## How to use this
 
-1. In angular.json:
+1. Install using yarn or npm: `yarn add -D ngx-library-assets`
+2. In angular.json:
 
 * set the builder for the serve target to `ngx-library-assets:dev-server`
 * set the builder for the build target to `ngx-library-assets:browser`
 
-2. In your application, add an include.json file inside src/assets
+3. In your application, add an include.json file inside src/assets
 
 ```json
 {
