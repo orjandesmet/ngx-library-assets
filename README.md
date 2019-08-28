@@ -41,16 +41,16 @@ If this name is not found in the workspace, a warning will appear in the console
 ### assetsRoot
 
 When set to **false** or absent, all assets of that library will be placed in subfolders.
-This means, all files will be placed in `/assets/<lib-project-name>/<lib-name>` keeping their folder structure.
+This means, all files will be placed in `/assets/<lib-project-name>` keeping their folder structure.
 
 When set to **true**, all assets of that library, apart from translations will be placed in the assets type root folder.
 This means, all files (except folder i18n) will be placed in `/assets/images` keeping their folder structure.
-But the content of folder i18n will still be placed in `/assets/<lib-project-name>/<lib-name>/i18n`
+But the content of folder i18n will still be placed in `/assets/<lib-project-name>/i18n`
 Be careful that the assets don't have the same names, they will overwrite each other.
 
 ## Example
 
-This package contains an example workspace with a basic Angular application and 2 libraries.
+This repository contains an example workspace with a basic Angular application and 2 libraries.
 The shared library has option **assetsRoot** set to true.
 The my-lib library has option **assetsRoot** absent (default = false).
 The application's include.json also mentions an non-existing library, named example-non-existing-lib.
