@@ -52,7 +52,8 @@ export function extendAssets(options: BrowserBuilderSchema, context: any): Promi
                   })
                   .map(library => {
                     const libraryRoot = workspace.getProject(library.name).sourceRoot;
-                    context.logger.info(`Adding library ${library.name} (${libraryRoot})`);
+                    const subFolder = !library.assetsRoot ? `/${library.name}` : '';
+                    context.logger.info(`Adding library ${library.name} (${libraryRoot}/assets -> ./assets${subFolder})`);
                     
                     return [
                       {
@@ -63,7 +64,7 @@ export function extendAssets(options: BrowserBuilderSchema, context: any): Promi
                       {
                         glob: '**/*',
                         input: `./${libraryRoot}/assets`,
-                        output: `./assets/${!library.assetsRoot ? library.name : ''}`,
+                        output: `./assets${subFolder}`,
                         ignore: ['i18n/**/*']
                       }
                     ];
