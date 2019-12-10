@@ -1,10 +1,10 @@
 {
   "name": "ngx-library-assets",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Angular builders to include assets from libraries into applications",
   "builders": "builders.json",
   "scripts": {
-    "build": "tsc -p tsconfig.json && yarn cpy-schemas",
+    "build": "tsc -p tsconfig.json && npm run cpy-schemas",
     "cpy-schemas": "npx cpy '**/schema.json' '../dist' --cwd=src --parents",
     "test": "test"
   },
@@ -33,11 +33,11 @@
   },
   "homepage": "https://github.com/orjandesmet/ngx-library-assets#readme",
   "peerDependencies": {
-    "@angular/cli": "^8.0.0"
+    "@angular/cli": "^8.3.20"
   },
   "dependencies": {
-    "@angular-devkit/architect": "^0.803.0",
-    "@angular-devkit/build-angular": "^0.803.0"
+    "@angular-devkit/architect": "^0.803.20",
+    "@angular-devkit/build-angular": "^0.803.20"
   },
   "devDependencies": {
     "cpy-cli": "^2.0.0"
