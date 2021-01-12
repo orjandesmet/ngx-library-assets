@@ -126,7 +126,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/my-lib/tsconfig.lib.json",
             "project": "projects/my-lib/ng-package.json"
@@ -166,7 +166,7 @@
       "prefix": "shared",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/shared/tsconfig.lib.json",
             "project": "projects/shared/ng-package.json"

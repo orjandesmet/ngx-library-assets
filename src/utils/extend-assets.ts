@@ -1,7 +1,7 @@
+import { BuilderContext } from '@angular-devkit/architect';
 import { Schema as BrowserBuilderSchema } from '@angular-devkit/build-angular/src/browser/schema';
-import { experimental, getSystemPath, normalize, resolve, schema } from '@angular-devkit/core';
+import { getSystemPath, normalize, workspaces } from '@angular-devkit/core';
 import { NodeJsSyncHost } from '@angular-devkit/core/node';
-import { Workspace } from '@angular-devkit/core/src/experimental/workspace';
 import * as fs from 'fs';
 import * as path from 'path';
 import { from } from 'rxjs';
@@ -16,20 +16,17 @@ interface IncludeAssets {
   libs: IncludeLibrary[];
 }
 
-function getWorkspace(context): Promise<Workspace> {
-  const registry = new schema.CoreSchemaRegistry();
-  registry.addPostTransform(schema.transforms.addUndefinedDefaults);
-
-  return experimental.workspace.Workspace.fromPath(new NodeJsSyncHost(), normalize(context.workspaceRoot), registry);
+function getWorkspace(context: BuilderContext): Promise<workspaces.WorkspaceDefinition> {
+  return workspaces.readWorkspace(normalize(context.workspaceRoot), workspaces.createWorkspaceHost(new NodeJsSyncHost()), workspaces.WorkspaceFormat.JSON).then(v => v.workspace);
 }
 
-export function extendAssets(options: BrowserBuilderSchema, context: any): Promise<BrowserBuilderSchema> {
+export function extendAssets(options: BrowserBuilderSchema, context: BuilderContext): Promise<BrowserBuilderSchema> {
   return from(getWorkspace(context))
     .pipe(
       map(workspace => {
-        const projectName = context.target ? context.target.project : workspace.getDefaultProjectName();
+        const projectName = context.target ? context.target.project : workspace.extensions['defaultProject'] as string;
 
-        const projectRoot = resolve(workspace.root, normalize(workspace.getProject(projectName).root));
+        const projectRoot = normalize(workspace.projects.get(projectName).root);
         const includeFilePath = getSystemPath(normalize(path.join(projectRoot, normalize('src/assets/include.json'))));
         let newOptions = { ...options };
 
@@ -43,7 +40,7 @@ export function extendAssets(options: BrowserBuilderSchema, context: any): Promi
               assets: options.assets.concat(
                 assets.libs
                   .filter(library => {
-                    if (!workspace.listProjectNames().includes(library.name)) {
+                    if (!Array.from(workspace.projects.keys()).includes(library.name)) {
                       context.logger.warn(`WARN: A project named '${library.name}' does not exist in this workspace.`);
                       return false;
                     } else {
@@ -51,7 +48,7 @@ export function extendAssets(options: BrowserBuilderSchema, context: any): Promi
                     }
                   })
                   .map(library => {
-                    const libraryRoot = workspace.getProject(library.name).sourceRoot;
+                    const libraryRoot = workspace.projects.get(library.name).sourceRoot;
                     const subFolder = !library.assetsRoot ? `/${library.name}` : '';
                     context.logger.info(`Adding library ${library.name} (${libraryRoot}/assets -> ./assets${subFolder})`);
                     

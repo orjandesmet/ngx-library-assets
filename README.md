@@ -56,3 +56,6 @@ The shared library has option **assetsRoot** set to true.
 The my-lib library has option **assetsRoot** absent (default = false).
 The application's include.json also mentions an non-existing library, named example-non-existing-lib.
 To run the example project, cd into `example` and run `npm install` and then `npm start`.
+
+
+## Note: for versions prior to Angular 11, use v1.2.x
